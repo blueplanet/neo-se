@@ -33,7 +33,7 @@ export const getSpace = (id: string) => {
   sb.emitAppCall(scriptHash, 'get_space', [u.str2hexstring(id)])
 
   const script = sb.str
-  const parseArraay = rpc.VMZip(toStringArray)
+  const parseArraay = rpc.VMZip(u.hexstring2str, u.hexstring2str)
 
   return rpc.Query.invokeScript(script, false).parseWith(parseArraay).execute(url)
     .then((res) => {
