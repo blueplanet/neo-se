@@ -6,7 +6,7 @@ const toStringArray = arr => {
 
 const url = 'http://localhost:20332'
 const networkUrl = 'http://localhost:4000/api/main_net'
-const scriptHash = '88e795f2234e87c2b0b281ecafd40cff96c0a365'
+const scriptHash = '989b763130c506c157fb717f4ddf45c2fba67159'
 const wif = 'KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr'
 
 export const getSpaceIds = () => {
@@ -16,6 +16,7 @@ export const getSpaceIds = () => {
   const parseTokenInfo = rpc.VMZip(toStringArray)
   return rpc.Query.invokeScript(script, false).parseWith(parseTokenInfo).execute(url)
     .then((res) => {
+      console.log(res)
       return res.map(x => x[0])
     })
     .catch(err => {

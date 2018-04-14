@@ -30,8 +30,8 @@ export const mutations = {
 
 export const actions = {
   async load({commit}) {
-    // const ids: string[] = await getSpaceIds()
-    // commit('setIds', ids)
+    const ids: string[] = await getSpaceIds()
+    commit('setIds', ids)
 
     // ids.forEach(id => {
     //   console.dir(id)
