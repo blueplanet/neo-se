@@ -13,11 +13,11 @@ div
         v-list-tile-content
           v-list-tile-title 最近借りた物件
       v-subheader.mt-3.grey--text.text--darken-1 オーナーメニュー
-      v-list-tile(@click="go('/')")
+      v-list-tile(@click="go('/my/spaces')")
         v-list-tile-action
           v-icon home
         v-list-tile-title 物件一覧
-      v-list-tile(@click="go('/spaces/new')")
+      v-list-tile(@click="go('/my/spaces/new')")
         v-list-tile-action
           v-icon editor
         v-list-tile-title 物件を登録

@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 import { api } from '@cityofzion/neon-js'
+import { getSpaceIds } from '~/lib/nse'
+
 
 export interface Space {
 }
@@ -23,8 +25,7 @@ export const mutations = {
 
 export const actions = {
   async load({commit}) {
-    const hash = '8a4e092f789b85945a7267f0367175977ae50b52'
-    const test = await api.nep5.getTokenInfo('https://nse-node.ap.ngrok.io', hash)
+    const test = await getSpaceIds()
     console.dir(test)
     const response = await axios.get('/spaces.json')
     const spaces = response.data.reduce((result, curr) => {
