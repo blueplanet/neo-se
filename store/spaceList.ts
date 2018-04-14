@@ -23,7 +23,8 @@ export const mutations = {
 
 export const actions = {
   async load({commit}) {
-    const test = await api.nep5.getTokenInfo('https://nse-node.ap.ngrok.io', 'f2e7c097856c1a803fdfc49922514509b7ba84f7')
+    const hash = '8a4e092f789b85945a7267f0367175977ae50b52'
+    const test = await api.nep5.getTokenInfo('https://nse-node.ap.ngrok.io', hash)
     console.dir(test)
     // // const response = await axios.get('/spaces.json')
     // const spaces = response.data.reduce((result, curr) => {

@@ -1,4 +1,5 @@
 export const state = () => ({
+  connecting: true,
   connected: false,
   isLoggedIn: false,
   address: '',
@@ -14,6 +15,9 @@ export const mutations = {
     state.connected = false
     state.isLoggedIn = false
     state.address = ''
+  },
+  finish(state) {
+    state.connecting = false
   }
 }
 
@@ -23,6 +27,7 @@ export const actions = {
     window.addEventListener('message', (event) => {
       if (event.data && event.data.type === 'NEOLINK_GET_EXTENSION_STATUS_RESPONSE') {
         commit('setExtensionState', event)
+        commit('finish')
       }
     }, false)
 
@@ -30,6 +35,7 @@ export const actions = {
     const authCheckTimeoutTimer = setTimeout(() => {
       if (state.connected !== true) {
         commit('failExtensionState')
+        commit('finish')
       }
     } , 3000)
   }
