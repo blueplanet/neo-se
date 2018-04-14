@@ -1,10 +1,9 @@
 import Neon, { api, rpc, u, sc } from '@cityofzion/neon-js'
 
-export const toStringArray = arr => {
+const toStringArray = arr => {
   return arr.map(x => x.value)
 }
 
-const parseTokenInfo = rpc.VMZip(toStringArray)
 const url = 'https://nse-node.ap.ngrok.io'
 const networkUrl = 'https://nse-scan.ap.ngrok.io/api/main_net'
 const scriptHash = '9b4ba50a54f31c7ec0de8b3efd8178c686d815da'
@@ -15,6 +14,7 @@ export const getSpaceIds = () => {
   sb
     .emitAppCall(scriptHash, 'get_space_ids')
   const script = sb.str
+  const parseTokenInfo = rpc.VMZip(toStringArray)
   return rpc.Query.invokeScript(script, false).parseWith(parseTokenInfo).execute(url)
     .then((res) => {
       return res.map(x => x[0])
@@ -33,7 +33,8 @@ export const getSpace = (id: string) => {
       u.str2hexstring(id),
     ])
   const script = sb.str
-  return rpc.Query.invokeScript(script, false).execute(url)
+  const parseTokenInfo = rpc.VMZip(toStringArray)
+  return rpc.Query.invokeScript(script, false).parseWith(parseTokenInfo).execute(url)
     .then((res) => {
       console.dir(res)
       return res
