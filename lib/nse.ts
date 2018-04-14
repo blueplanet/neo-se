@@ -6,7 +6,7 @@ const toStringArray = arr => {
 
 const url = 'http://localhost:20332'
 const networkUrl = 'http://localhost:4000/api/main_net'
-const scriptHash = '989b763130c506c157fb717f4ddf45c2fba67159'
+const scriptHash = 'c91268f88a7f1c5d5205118e4681189b2731158b'
 const wif = 'KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr'
 
 export const getSpaceIds = () => {

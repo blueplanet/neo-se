@@ -44,10 +44,12 @@ export default class extends Vue {
 
   submit () {
     const form: any = this.$refs.form
-    // if (form.validate()) {
-      // TODO: submit data
+    if (form.validate()) {
       createSpace(this.address, this.name, this.description)
-    // }
+      .then(txid => {
+        alert(txid)
+      })
+    }
   }
 }
 </script>
