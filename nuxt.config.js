@@ -25,7 +25,7 @@ module.exports = {
       `http://${host}:${port}`
   },
   head: {
-    title: 'tt1',
+    title: 'NEO SE',
     meta: [
       { charset: 'utf-8' },
       {
@@ -55,6 +55,13 @@ module.exports = {
   ** Build configuration
   */
   css: ['~/assets/styles/app.sass'],
+  router: {
+    linkActiveClass: 'active',
+    middleware: [
+    ],
+  },
+  plugins: [
+  ],
   build: {},
   modules: [
     '@nuxtjs/axios',
