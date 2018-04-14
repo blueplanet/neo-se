@@ -7,7 +7,6 @@ export const toStringArray = arr => {
 const parseTokenInfo = rpc.VMZip(toStringArray)
 const url = 'https://nse-node.ap.ngrok.io'
 const networkUrl = 'https://nse-scan.ap.ngrok.io/api/main_net'
-const scriptHash = '82049bd6fa10d2f60647e2a9f7141950df6207c0'
 const wif = 'KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr'
 
 export const getSpaceIds = () => {
