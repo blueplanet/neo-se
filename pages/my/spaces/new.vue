@@ -7,7 +7,7 @@ v-container(fill-height grid-list-lg)
           v-form(v-model="valid" ref="form" lazy-validation)
             v-text-field(label="物件名" v-model="name" :rules="nameRules" :counter="10" required)
             v-text-field(label="概要" :textarea="true" v-model="description" :rules="descriptionRules" required)
-            file-input(v-model="filename" @formData="formData")
+            //- file-input(v-model="filename" @formData="formData")
         v-card-actions
           v-btn(flat color="green" @click="submit") 保存
 </template>
@@ -45,8 +45,8 @@ export default class extends Vue {
   submit () {
     const form: any = this.$refs.form
     // if (form.validate()) {
-      createSpace(this.address)
       // TODO: submit data
+      createSpace(this.address, this.name, this.description)
     // }
   }
 }

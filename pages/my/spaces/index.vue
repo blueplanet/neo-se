@@ -22,8 +22,8 @@ import { Action, Getter } from 'vuex-class'
   components: {}
 })
 export default class extends Vue {
-  @Action('spaceList/load') loadSpaces
-  @Getter('spaceList/items') items
+  @Action('mySpaceList/load') loadSpaces
+  @Getter('mySpaceList/items') items
   dialog = false
 
   created() {

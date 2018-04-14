@@ -21,6 +21,10 @@ div
         v-list-tile-action
           v-icon editor
         v-list-tile-title 物件を登録
+      v-list-tile(@click="go('/my/booking-requests')")
+        v-list-tile-action
+          v-icon event
+        v-list-tile-title 予約管理
       v-list-tile(@click="go('/my-profile/edit')")
         v-list-tile-action
           v-icon(color="grey darken-1") settings

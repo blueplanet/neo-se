@@ -24,26 +24,30 @@ v-container(fill-height grid-list-lg)
           v-container(grid-list-md)
             v-layout(wrap)
               v-flex(xs12)
-                v-text-field(label="アドレス" required)
-          small *indicates required field
+                v-text-field(label="アドレス" :value="address" disabled required)
+                v-date-picker(v-model="picker" :landscape="true" :reactive="false")
+
+          //- small *indicates required field
         v-card-actions
+          v-btn(color="blue darken-1" flat @click.native="save") 借りる
+          v-btn(color="blue darken-1" flat @click.native="dialog = false") キャンセル
           v-spacer
-          v-btn(color="blue darken-1" flat @click.native="dialog = false") Close
-          v-btn(color="blue darken-1" flat @click.native="dialog = false") Save
 
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Action, Getter } from 'vuex-class'
+import { State, Action, Getter } from 'vuex-class'
 
 @Component({
   components: {}
 })
 export default class extends Vue {
+  @State(s => s.neolink.address) address
   @Action('spaceList/load') loadSpaces
   @Getter('spaceList/items') items
   dialog = false
+  picker = null
 
   created() {
     this.loadSpaces()
@@ -51,6 +55,11 @@ export default class extends Vue {
 
   open(item) {
     this.dialog = true
+  }
+
+  save() {
+    console.dir(this.picker)
+    this.dialog = false
   }
 }
 </script>

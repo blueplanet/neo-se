@@ -41,7 +41,7 @@ export const actions = {
     //   })
     // });
 
-    const response = await axios.get('/spaces.json')
+    const response = await axios.get('/my-spaces.json')
     const spaces = response.data.reduce((result, curr) => {
       result[curr.id] = curr
       return result
@@ -53,5 +53,5 @@ export const actions = {
 export const getters = {
   items(state: State) {
     return Object.keys(state.entities).map(key => state.entities[key])
-  },
+  }
 }

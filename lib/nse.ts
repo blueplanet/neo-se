@@ -1,7 +1,7 @@
 import Neon, { api, rpc, u, sc } from '@cityofzion/neon-js'
 
 export const toStringArray = arr => {
-  return arr.map(data => data.value)
+  return arr.map(x => x.value)
 }
 
 const parseTokenInfo = rpc.VMZip(toStringArray)
@@ -17,6 +17,25 @@ export const getSpaceIds = () => {
   const script = sb.str
   return rpc.Query.invokeScript(script, false).parseWith(parseTokenInfo).execute(url)
     .then((res) => {
+      return res.map(x => x[0])
+    })
+    .catch(err => {
+      console.error(err)
+      throw err
+    })
+}
+
+export const getSpace = (id: string) => {
+  console.dir(id)
+  const sb = new sc.ScriptBuilder()
+  sb
+    .emitAppCall(scriptHash, 'get_space', [
+      u.str2hexstring(id),
+    ])
+  const script = sb.str
+  return rpc.Query.invokeScript(script, false).execute(url)
+    .then((res) => {
+      console.dir(res)
       return res
     })
     .catch(err => {
@@ -25,7 +44,7 @@ export const getSpaceIds = () => {
     })
 }
 
-export const createSpace = (address) => {
+export const createSpace = (address, name, description) => {
   console.log('start')
   console.log(address)
   const myAccount = Neon.create.account(wif)
@@ -41,8 +60,8 @@ export const createSpace = (address) => {
     }],
     script: { scriptHash, operation: 'create_space', args: [
       u.str2hexstring(address),
-      u.str2hexstring('client-test1'),
-      u.str2hexstring('client-desc1'),
+      u.str2hexstring(name),
+      u.str2hexstring(description),
     ] },
     gas: 0,
   }

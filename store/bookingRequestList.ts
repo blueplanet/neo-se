@@ -3,11 +3,11 @@ import { api } from '@cityofzion/neon-js'
 import { getSpaceIds, getSpace } from '~/lib/nse'
 
 
-export interface Space {
+export interface BookingRequest {
 }
 
 export interface State {
-  entities: {[id: string]: Space}
+  entities: {[id: string]: BookingRequest}
   entityIds: int[],
 }
 
@@ -41,7 +41,7 @@ export const actions = {
     //   })
     // });
 
-    const response = await axios.get('/spaces.json')
+    const response = await axios.get('/booking-requests.json')
     const spaces = response.data.reduce((result, curr) => {
       result[curr.id] = curr
       return result
@@ -53,5 +53,5 @@ export const actions = {
 export const getters = {
   items(state: State) {
     return Object.keys(state.entities).map(key => state.entities[key])
-  },
+  }
 }
