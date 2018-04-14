@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
+import { api } from '@cityofzion/neon-js'
 
 export interface Space {
 }
@@ -22,12 +23,14 @@ export const mutations = {
 
 export const actions = {
   async load({commit}) {
-    const response = await axios.get('/spaces.json')
-    const spaces = response.data.reduce((result, curr) => {
-      result[curr.id] = curr
-      return result
-    }, {})
-    commit('merge', spaces)
+    const test = await api.nep5.getTokenInfo('https://nse-node.ap.ngrok.io', 'f2e7c097856c1a803fdfc49922514509b7ba84f7')
+    console.dir(test)
+    // // const response = await axios.get('/spaces.json')
+    // const spaces = response.data.reduce((result, curr) => {
+    //   result[curr.id] = curr
+    //   return result
+    // }, {})
+    // commit('merge', spaces)
   },
 }
 
