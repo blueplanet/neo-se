@@ -1,11 +1,10 @@
 import { api, rpc, u, sc } from '@cityofzion/neon-js'
 
-export const parseValue = arr => {
-  if (typeof arr !== 'object' || !arr.length) throw new Error('reverseArray expects an array')
+export const toStringArray = arr => {
   return arr.map(data => data.value)
 }
 
-const parseTokenInfo = rpc.VMZip(parseValue)
+const parseTokenInfo = rpc.VMZip(toStringArray)
 const url = 'https://nse-node.ap.ngrok.io'
 const scriptHash = '8a1235f27f6374bfcb80bb4d96d7128167cfcd89'
 
@@ -23,3 +22,4 @@ export const getSpaceIds = () => {
       throw err
     })
 }
+
