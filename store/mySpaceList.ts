@@ -33,13 +33,17 @@ export const actions = {
     const ids: string[] = await getSpaceIds()
     commit('setIds', ids)
 
-    // ids.forEach(id => {
-    //   console.dir(id)
-    //   getSpace(id).then(space => {
-    //     console.dir(space)
-    //     commit('set', {[id]: space})
-    //   })
-    // });
+    console.log('ids :', ids)
+
+    if (ids.length > 0) {
+      ids.forEach(id => {
+        console.dir(id)
+        getSpace(id).then(space => {
+          console.dir(space)
+          commit('set', {[id]: space})
+        })
+      });
+    }
 
     const response = await axios.get('/my-spaces.json')
     const spaces = response.data.reduce((result, curr) => {

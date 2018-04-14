@@ -6,17 +6,19 @@ const toStringArray = arr => {
 
 const url = 'http://localhost:20332'
 const networkUrl = 'http://localhost:4000/api/main_net'
-const scriptHash = 'c91268f88a7f1c5d5205118e4681189b2731158b'
+const scriptHash = '1bd9028604b86c9d59dae6f1c892501b8c0347bb'
 const wif = 'KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr'
 
 export const getSpaceIds = () => {
   const sb = new sc.ScriptBuilder()
   sb.emitAppCall(scriptHash, 'get_space_ids')
   const script = sb.str
-  const parseTokenInfo = rpc.VMZip(toStringArray)
-  return rpc.Query.invokeScript(script, false).parseWith(parseTokenInfo).execute(url)
+  const parseIds = rpc.VMZip(toStringArray)
+
+  return rpc.Query.invokeScript(script, false).parseWith(parseIds).execute(url)
     .then((res) => {
-      console.log(res)
+      if (res.length == 1 && res[0].length == 0) { return [] }
+
       return res.map(x => x[0])
     })
     .catch(err => {
@@ -28,13 +30,12 @@ export const getSpaceIds = () => {
 export const getSpace = (id: string) => {
   console.dir(id)
   const sb = new sc.ScriptBuilder()
-  sb
-    .emitAppCall(scriptHash, 'get_space', [
-      u.str2hexstring(id),
-    ])
+  sb.emitAppCall(scriptHash, 'get_space', [u.str2hexstring(id)])
+
   const script = sb.str
-  const parseTokenInfo = rpc.VMZip(toStringArray)
-  return rpc.Query.invokeScript(script, false).parseWith(parseTokenInfo).execute(url)
+  const parseArraay = rpc.VMZip(toStringArray)
+
+  return rpc.Query.invokeScript(script, false).parseWith(parseArraay).execute(url)
     .then((res) => {
       console.dir(res)
       return res
