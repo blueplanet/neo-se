@@ -63,6 +63,9 @@ module.exports = {
   plugins: [
   ],
   build: {},
+  vendor: [
+    '~/lib/nse',
+  ],
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',

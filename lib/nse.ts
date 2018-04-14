@@ -1,4 +1,4 @@
-import { api, rpc, u, sc } from '@cityofzion/neon-js'
+import Neon, { api, rpc, u, sc } from '@cityofzion/neon-js'
 
 export const toStringArray = arr => {
   return arr.map(data => data.value)
@@ -6,7 +6,9 @@ export const toStringArray = arr => {
 
 const parseTokenInfo = rpc.VMZip(toStringArray)
 const url = 'https://nse-node.ap.ngrok.io'
-const scriptHash = '8a1235f27f6374bfcb80bb4d96d7128167cfcd89'
+const networkUrl = 'https://nse-scan.ap.ngrok.io/api/main_net'
+const scriptHash = '82049bd6fa10d2f60647e2a9f7141950df6207c0'
+const wif = 'KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr'
 
 export const getSpaceIds = () => {
   const sb = new sc.ScriptBuilder()
@@ -21,5 +23,43 @@ export const getSpaceIds = () => {
       console.error(err)
       throw err
     })
+}
+
+export const createSpace = (address) => {
+  console.log('start')
+  console.log(address)
+  const myAccount = Neon.create.account(wif)
+  console.log(myAccount)
+  const config = {
+    net: networkUrl,
+    privateKey: myAccount.privateKey,
+    address: myAccount.address,
+    intents: [{
+      assetId: Neon.CONST.ASSET_ID['NEO'],
+      value: 5,
+      scriptHash,
+    }],
+    script: { scriptHash, operation: 'create_space', args: [
+      u.str2hexstring(address),
+      u.str2hexstring('client-test1'),
+      u.str2hexstring('client-desc1'),
+    ] },
+    gas: 0,
+  }
+  console.log(config)
+
+  return new Promise((resolve, reject) => {
+    api.doInvoke(config)
+      .then(c => {
+        console.log(c)
+        if (c.response.result === true) {
+          console.log(c.response.txid)
+        } else {
+          // TODO 失敗
+        }
+        resolve(c.response.txid)
+      })
+      .catch(e => { console.error(e); reject(e) })
+  })
 }
 

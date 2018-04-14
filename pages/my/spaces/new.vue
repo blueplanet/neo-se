@@ -9,12 +9,13 @@ v-container(fill-height grid-list-lg)
             v-text-field(label="概要" :textarea="true" v-model="description" :rules="descriptionRules" required)
             file-input(v-model="filename" @formData="formData")
         v-card-actions
-          v-btn(flat color="green") 保存
+          v-btn(flat color="green" @click="submit") 保存
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Action, Getter } from 'vuex-class'
+import { State, Action } from 'vuex-class'
+import { createSpace } from '~/lib/nse'
 import FileInput from '~/components/FileInput.vue'
 
 @Component({
@@ -23,6 +24,7 @@ import FileInput from '~/components/FileInput.vue'
   },
 })
 export default class extends Vue {
+  @State(s => s.neolink.address) address
   created() {
   }
   valid: boolean = false
@@ -42,9 +44,10 @@ export default class extends Vue {
 
   submit () {
     const form: any = this.$refs.form
-    if (form.validate()) {
+    // if (form.validate()) {
+      createSpace(this.address)
       // TODO: submit data
-    }
+    // }
   }
 }
 </script>
