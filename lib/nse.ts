@@ -4,15 +4,14 @@ const toStringArray = arr => {
   return arr.map(x => x.value)
 }
 
-const url = 'https://nse-node.ap.ngrok.io'
-const networkUrl = 'https://nse-scan.ap.ngrok.io/api/main_net'
-const scriptHash = '9b4ba50a54f31c7ec0de8b3efd8178c686d815da'
+const url = 'http://localhost:20332'
+const networkUrl = 'http://localhost:4000/api/main_net'
+const scriptHash = '88e795f2234e87c2b0b281ecafd40cff96c0a365'
 const wif = 'KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr'
 
 export const getSpaceIds = () => {
   const sb = new sc.ScriptBuilder()
-  sb
-    .emitAppCall(scriptHash, 'get_space_ids')
+  sb.emitAppCall(scriptHash, 'get_space_ids')
   const script = sb.str
   const parseTokenInfo = rpc.VMZip(toStringArray)
   return rpc.Query.invokeScript(script, false).parseWith(parseTokenInfo).execute(url)
@@ -47,9 +46,7 @@ export const getSpace = (id: string) => {
 
 export const createSpace = (address, name, description) => {
   console.log('start')
-  console.log(address)
   const myAccount = Neon.create.account(wif)
-  console.log(myAccount)
   const config = {
     net: networkUrl,
     privateKey: myAccount.privateKey,
@@ -66,16 +63,16 @@ export const createSpace = (address, name, description) => {
     ] },
     gas: 0,
   }
-  console.log(config)
 
   return new Promise((resolve, reject) => {
     api.doInvoke(config)
       .then(c => {
         console.log(c)
         if (c.response.result === true) {
-          console.log(c.response.txid)
+          console.log('call success: ', c.response.txid)
         } else {
           // TODO 失敗
+          console.log('call failed: ', c.response.txid)
         }
         resolve(c.response.txid)
       })
