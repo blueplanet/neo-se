@@ -2,22 +2,19 @@
 v-container(fill-height grid-list-lg)
   v-layout(row wrap)
     v-flex(xs12)
-      v-form(v-model="valid")
-        v-text-field(label="名前" v-model="name" :rules="nameRules" :counter="10" required)
+      v-text-field(label="Address" :value="address" disabled)
 
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Action, Getter } from 'vuex-class'
+import { State } from 'vuex-class'
 
 @Component({
   components: {}
 })
 export default class extends Vue {
-
-  created() {
-  }
+  @State(s => s.neolink.address) address
 }
 </script>
 
