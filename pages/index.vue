@@ -1,10 +1,10 @@
 <template lang="pug">
 v-container(fill-height grid-list-lg)
   v-layout(row wrap)
-    v-flex(xs12 sm6 md4 v-for="item in items" key="index")
+    v-flex(xs12 sm6 md4 v-for="(item, index) in items" :key="index")
       v-card
         v-card-media(:src="item.image" height="200px" cover)
-        v-card-title(:primary-title="item.title")
+        v-card-title
           div
             v-avatar(size="36").mr-2
               img(src="https://randomuser.me/api/portraits/men/88.jpg" alt)
