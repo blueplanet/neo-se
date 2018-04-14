@@ -15,6 +15,7 @@ import { State } from 'vuex-class'
 })
 export default class extends Vue {
   @State(s => s.neolink.address) address
+  valid: boolean
 }
 </script>
 

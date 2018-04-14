@@ -23,6 +23,7 @@ import FileInput from '~/components/FileInput.vue'
   },
 })
 export default class extends Vue {
+  valid: boolean
   created() {
   }
   valid: boolean = false
