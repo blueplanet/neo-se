@@ -7,7 +7,8 @@ div
     v-content
       nuxt
   v-app(dark v-else)
-    | NEOLINKの状態を取得しています
+    v-alert(type="info" :value="true")
+      | NEOLINKの状態を取得しています
 </template>
 
 <script lang="ts">
