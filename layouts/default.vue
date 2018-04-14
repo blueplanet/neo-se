@@ -3,12 +3,12 @@ div
   v-app(dark v-if="!connecting")
     Menu(v-if="isLoggedIn")
     v-alert(type="error" :value="true" v-else)
-      | NEOLINKに接続できませんでした
+      | NeoLinkに接続できませんでした
     v-content
       nuxt
   v-app(dark v-else)
     v-alert(type="info" :value="true")
-      | NEOLINKの状態を取得しています
+      | NeoLinkの状態を取得しています
 </template>
 
 <script lang="ts">

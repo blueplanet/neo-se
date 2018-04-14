@@ -26,12 +26,12 @@ export const actions = {
     const hash = '8a4e092f789b85945a7267f0367175977ae50b52'
     const test = await api.nep5.getTokenInfo('https://nse-node.ap.ngrok.io', hash)
     console.dir(test)
-    // // const response = await axios.get('/spaces.json')
-    // const spaces = response.data.reduce((result, curr) => {
-    //   result[curr.id] = curr
-    //   return result
-    // }, {})
-    // commit('merge', spaces)
+    const response = await axios.get('/spaces.json')
+    const spaces = response.data.reduce((result, curr) => {
+      result[curr.id] = curr
+      return result
+    }, {})
+    commit('merge', spaces)
   },
 }
 

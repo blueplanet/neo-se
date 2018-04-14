@@ -13,7 +13,9 @@ v-container(fill-height grid-list-lg)
             h3.headline.mb-0 {{item.title}}
             //- div {{item.description}}
         v-card-actions
-          v-btn(flat color="green" @click.native.stop="dialog = true") 借りる
+          v-btn(flat color="green" @click.native.stop="open(item)" :disabled="item.reserved === 'true'")
+            span(v-if="item.reserved !== 'true'") 借りる
+            span(v-else="item.reserved === 'true'") 貸出中
     v-dialog(v-model="dialog" persistent max-width="500px")
       v-card
         v-card-title
@@ -45,6 +47,10 @@ export default class extends Vue {
 
   created() {
     this.loadSpaces()
+  }
+
+  open(item) {
+    this.dialog = true
   }
 }
 </script>
