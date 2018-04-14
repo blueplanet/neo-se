@@ -1,8 +1,10 @@
 <template lang="pug">
 v-container(fill-height grid-list-lg)
   v-layout(row wrap)
-    v-flex(xs12)
-      v-text-field(label="Address" :value="address" disabled)
+    v-flex(xs12 sm8 offset-sm2)
+      v-card
+        v-card-text(primary-title)
+          v-text-field(label="Address" :value="address" disabled)
 
 </template>
 

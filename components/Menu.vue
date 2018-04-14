@@ -2,26 +2,29 @@
 div
   v-navigation-drawer(fixed clipped v-model="drawer" app)
     v-list(dense)
-      v-list-tile(v-for="item in items" :key="item.text" @click="go(item.href)")
+      v-list-tile(@click="go('/')")
         v-list-tile-action
-          v-icon {{ item.icon }}
+          v-icon trending_up
         v-list-tile-content
-          v-list-tile-title
-            | {{ item.text }}
-      v-subheader.mt-3.grey--text.text--darken-1 おすすめのオーナー
-      v-list
-        v-list-tile(v-for="item in items2" :key="item.text" avatar @click="")
-          v-list-tile-avatar
-            img(:src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`" alt="")
-          v-list-tile-title(v-text="item.text")
-      //- v-list-tile.mt-3(@click="")
-      //-   v-list-tile-action
-      //-     v-icon(color="grey darken-1") add_circle_outline
-      //-   v-list-tile-title.grey--text.text--darken-1 Browse Channels
+          v-list-tile-title 人気の物件
+      v-list-tile(@click="go('/')")
+        v-list-tile-action
+          v-icon history
+        v-list-tile-content
+          v-list-tile-title 最近借りた物件
+      v-subheader.mt-3.grey--text.text--darken-1 オーナーメニュー
+      v-list-tile(@click="go('/')")
+        v-list-tile-action
+          v-icon home
+        v-list-tile-title 物件一覧
+      v-list-tile(@click="go('/spaces/new')")
+        v-list-tile-action
+          v-icon editor
+        v-list-tile-title 物件を登録
       v-list-tile(@click="go('/my-profile/edit')")
         v-list-tile-action
           v-icon(color="grey darken-1") settings
-        v-list-tile-title.grey--text.text--darken-1 ユーザー設定
+        v-list-tile-title.grey--text.text--darken-1 アカウント
   v-toolbar(color="green" dense fixed clipped-left app)
     v-toolbar-side-icon(@click.stop="drawer = !drawer")
     v-icon.mx-3 fab fa-youtube
@@ -37,11 +40,6 @@ export default {
   data: () => ({
     drawer: true,
     items: [
-      { icon: 'trending_up', text: '人気の物件', href: '/' },
-      { icon: 'history', text: '最近借りた物件', href: '/' },
-      { icon: 'editor', text: '物件を登録', href: '/spaces/new' },
-    ],
-    items2: [
       { picture: Math.floor(Math.random()* 100), text: '土屋 広幸' },
       { picture: Math.floor(Math.random()* 100), text: '安部川 紀' },
       { picture: Math.floor(Math.random()* 100), text: '夢野 陽一朗' },
